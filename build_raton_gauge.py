@@ -7,8 +7,8 @@ la zone spirale tourne — et seule sa composante HAUTE FRÉQUENCE (la basse
 fréquence fixe porte les gradients qui trahiraient la rotation) ; (4)
 émergence par TRANSLATION à travers une « lèvre de trappe » + dissolves
 étagés sur 5 keyframes ; (6) gag : banane brandie → gueule ouverte → GULP
-(smear) → joues ballon → grimace langue rose → aspiré par le vortex
-(« chasse d'eau » : le vortex ré-accélère au flush).
+(smear) → joues ballon → délice narquois (il savoure et NARGUE le
+spectateur, léchage de babines) → aspiré par le vortex (« chasse d'eau »).
 
 Sprites = matte différentiel (|KF − statique| seuillé) ∧ masque-flamme de la
 statique : le raton/banane ne peuvent JAMAIS recouvrir le fond sombre, les
@@ -18,7 +18,7 @@ r54 l'aurait amputée — grief v2 « crop »).
 
 Entrées : Icone/Gauge_Magie_v2.webp (statique 256², JAMAIS resamplée) +
 Icone/raton_v4/KF{1..5}.raw.png (1024², chaîne gpt-image-2).
-Sortie : Icone/Gauge_Magie_Raton_v4.png (APNG 256², 64 frames, délais
+Sortie : Icone/Gauge_Magie_Raton_v5.png (APNG 256², 64 frames, délais
 variables, cycle ≈ 10,2 s).
 """
 import math
@@ -211,10 +211,10 @@ def poses(f):
     if 39 <= f <= 42:      # BEAT SACRÉ joues ballon + micro-bounce
         sc = {39: 1.00, 40: 1.03, 41: 1.01, 42: 1.00}[f]
         return [(4, 1, 0, 0, sc, False, False)]
-    if 43 <= f <= 46:      # dissolve -> grimace
+    if 43 <= f <= 46:      # dissolve -> délice narquois
         u = float(smoothstep((f - 42) / 4.0))
         return [(4, 1 - u, 0, 0, 1.0, False, False), (5, u, 0, 0, 1.0, False, False)]
-    if 47 <= f <= 49:      # BEURK + jitter
+    if 47 <= f <= 49:      # TAUNT savoureux + dandinement
         return [(5, 1, [1, -1, 1][f - 47], 0, 1.0, False, False)]
     if 50 <= f <= 54:      # FLUSH : aspiré par le vortex
         t = (f - 49) / 5.0
@@ -263,9 +263,9 @@ for k, idx in enumerate(sample_ids):
     sample.paste(frames[idx], (k * W, 0))
 master = sample.quantize(256, method=Image.MEDIANCUT)
 frames_p = [fr.quantize(palette=master, dither=Image.FLOYDSTEINBERG) for fr in frames]
-frames_p[0].save('Icone/Gauge_Magie_Raton_v4.png', format='PNG', save_all=True,
+frames_p[0].save('Icone/Gauge_Magie_Raton_v5.png', format='PNG', save_all=True,
                  append_images=frames_p[1:], duration=delays, loop=0)
-data = open('Icone/Gauge_Magie_Raton_v4.png', 'rb').read()
+data = open('Icone/Gauge_Magie_Raton_v5.png', 'rb').read()
 print(f'frames: {N} | acTL: {b"acTL" in data} | fcTL: {data.count(b"fcTL")} | '
       f'taille: {len(data)/1e6:.2f} Mo | cycle: {sum(delays)/1000:.1f} s')
 
