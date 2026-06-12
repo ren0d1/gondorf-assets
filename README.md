@@ -10,8 +10,13 @@ backgrounds and icons. The sheet CSS references these files through
 ## Layout
 
 - `Background/` — per-faction and per-tab sheet background images.
-- `Icone/` — resource icons (vitalité, énergie, pouvoir, munitions) and the
-  three armour shields (physique / magique / énergie).
+- `Icone/` — resource gauge icons + armour shields. `Icone/source/` holds the
+  raw 1024² generations; `Icone/raton_v4/` holds the keyframes consumed by
+  `build_raton_gauge.py` (the raccoon-gauge APNG assembler).
+- `TokenMarkers-set-v4/` — the 13 PNG of the ACTIVE Roll20 token-marker set
+  « Gondorf v4 » (file name = marker name, do not rename). `alternatives/`
+  holds parked variants. Superseded v1/v2/v3 folders were removed 2026-06-12
+  (git history keeps them).
 
 ## Provenance & rights
 
